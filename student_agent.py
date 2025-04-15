@@ -1185,11 +1185,6 @@ def run_episode(env, render=False, render_interval=50):
             steps += 1
             max_tile = max(max_tile, np.max(next_state))
             state = next_state
-
-            # if steps % 10 == 0:
-            #     print(state)
-            #     print(reward)
-            
             if done:
                 break
                 
@@ -1202,10 +1197,11 @@ if __name__ == "__main__":
     from collections import defaultdict
     import subprocess
 
-    url = "https://www.dropbox.com/scl/fi/3rldcscf4bmurav3z4tlg/2048_320k.bin?rlkey=q1k2fy44smjbpaos88egm3i2u&st=4fg86rp1&dl=0"
-    output_file = "hello.bin"
+    url = "https://www.dropbox.com/scl/fi/y3gnocghe3ujk34esw2cl/2048_dqn_model.pth?rlkey=krql4sxktlnhcbzi8coqqfsa6&st=8wauhnck&dl=0"
+    output_file = "2048_dqn_model.pth"
 
-    subprocess.run(["curl", "-L", "-o", output_file, url], check=True)
+    
+    # subprocess.run(["curl", "-L", "-o", output_file, url], check=True)
     from test import *
     random.seed(0)
     for i in range(10):
