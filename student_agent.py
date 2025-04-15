@@ -11,6 +11,7 @@ import math
 import struct
 
 from collections import defaultdict
+model = CPPModel("2048.bin")
 
 
 COLOR_MAP = {
@@ -445,48 +446,43 @@ def get_action(state, score):
     best_child = max(root.children, key=lambda c: c.value)
     return best_child.action
 
-def run_episode(env, render=False, render_interval=50):
-         state = env.reset()
-         total_reward = 0
-         steps = 0
-         max_tile = 0
+# def run_episode(env, render=False, render_interval=50):
+#          state = env.reset()
+#          total_reward = 0
+#          steps = 0
+#          max_tile = 0
          
-         while True:
-             if render and (steps % render_interval == 0):
-                 env.render(action=None, savepath=f"frame_{steps:04d}.png")
+#          while True:
+#              if render and (steps % render_interval == 0):
+#                  env.render(action=None, savepath=f"frame_{steps:04d}.png")
              
-             action = get_action(state, env.score)
-             next_state, reward, done, _ = env.step(action)
+#              action = get_action(state, env.score)
+#              next_state, reward, done, _ = env.step(action)
              
-             total_reward += reward
-             steps += 1
-             max_tile = max(max_tile, np.max(next_state))
-             state = next_state
- 
-             # if steps % 10 == 0:
-             #     print(state)
-             #     print(reward)
-             
-             if done:
-                 break
+#              total_reward += reward
+#              steps += 1
+#              max_tile = max(max_tile, np.max(next_state))
+#              state = next_state
+#              if done:
+#                  break
                  
-         return env.score, max_tile, steps
-if __name__ == "__main__":
-     # main()
-    import argparse
-    import numpy as np
-    from tqdm import tqdm
-    from collections import defaultdict
-    import subprocess
-    url = "https://www.dropbox.com/scl/fi/2e5zpv08d93vt0p9xzrig/2048.bin?rlkey=urbv8m20unlrflnf5gyruanln&st=0z7n1itc&dl=0"
-    output_file = "2048.bin"
+#          return env.score, max_tile, steps
+# if __name__ == "__main__":
+#      # main()
+#     import argparse
+#     import numpy as np
+#     from tqdm import tqdm
+#     from collections import defaultdict
+#     import subprocess
+#     url = "https://www.dropbox.com/scl/fi/2e5zpv08d93vt0p9xzrig/2048.bin?rlkey=urbv8m20unlrflnf5gyruanln&st=0z7n1itc&dl=0"
+#     output_file = "2048.bin"
 
-    subprocess.run(["curl", "-L", "-o", output_file, url], check=True)
-    model = CPPModel("2048.bin")
-    from test import *
-    random.seed(0)
-    for i in range(10):
-        env = Game2048Env()
-        env.reset()
-        print(run_episode(env))
+#     subprocess.run(["curl", "-L", "-o", output_file, url], check=True)
+#     model = CPPModel("2048.bin")
+#     from test import *
+#     random.seed(0)
+#     for i in range(10):
+#         env = Game2048Env()
+#         env.reset()
+#         print(run_episode(env))
  
