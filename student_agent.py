@@ -11,7 +11,6 @@ import math
 import struct
 
 from collections import defaultdict
-model = CPPModel("2048.bin")
 
 
 COLOR_MAP = {
@@ -326,6 +325,7 @@ class CPPModel:
     def estimate(self, board):
         return sum(p.estimate(board) for p in self.patterns)
 
+model = CPPModel("2048.bin")
 
 class Node:
     def __init__(self, action=None, parent=None):
